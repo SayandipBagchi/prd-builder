@@ -1,0 +1,29 @@
+{
+  "name": "prd-builder",
+  "description": "A product requirement from source ticket to PRD, review, delivery tickets, test design and publication.",
+  "owner": {
+    "name": "Sayandip Bagchi",
+    "url": "https://github.com/SayandipBagchi"
+  },
+  "plugins": [
+    {
+      "name": "prd-builder",
+      "source": "./",
+      "description": "Takes a product idea from source ticket to shippable delivery artefacts: drafts a definition-of-ready PRD, reviews it against its sources on a scoreable rubric, and gates task brea",
+      "version": "1.0.0",
+      "author": {
+        "name": "Sayandip Bagchi"
+      },
+      "homepage": "https://github.com/SayandipBagchi/prd-builder",
+      "license": "MIT",
+      "keywords": [
+        "prd",
+        "product-management",
+        "requirements",
+        "jira",
+        "confluence",
+        "test-cases"
+      ]
+    }
+  ]
+}
