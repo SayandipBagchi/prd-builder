@@ -1,0 +1,46 @@
+# Optional UI metadata for OpenAI hosts. Not required for the skills' behaviour.
+# Lives in hosts/ rather than agents/: in Claude plugin format, agents/ means subagents.
+author: "Sayandip Bagchi"
+skills:
+  - name: prd-builder
+    interface:
+      display_name: "PRD Builder"
+      short_description: "Route product requirement work and hold the readiness gate"
+      default_prompt: "Use $prd-builder to take this ticket through to a PRD."
+    policy:
+      allow_implicit_invocation: true
+  - name: writing-prd
+    interface:
+      display_name: "Write a PRD"
+      short_description: "Draft or continue a definition-of-ready PRD from its sources"
+      default_prompt: "Use $writing-prd to draft a PRD from this ticket."
+    policy:
+      allow_implicit_invocation: true
+  - name: reviewing-prd
+    interface:
+      display_name: "Review a PRD"
+      short_description: "Score a PRD against its sources and return a readiness verdict"
+      default_prompt: "Use $reviewing-prd to tell me whether this PRD is ready."
+    policy:
+      allow_implicit_invocation: true
+  - name: planning-task-breakdown
+    interface:
+      display_name: "Break down a PRD"
+      short_description: "Turn an approved PRD into delivery tickets grouped by ownership"
+      default_prompt: "Use $planning-task-breakdown to break this PRD into delivery tickets."
+    policy:
+      allow_implicit_invocation: false
+  - name: writing-test-cases
+    interface:
+      display_name: "Test cases from a PRD"
+      short_description: "Derive a test design, and name what cannot be tested"
+      default_prompt: "Use $writing-test-cases to derive test cases from this PRD."
+    policy:
+      allow_implicit_invocation: true
+  - name: publishing-prd
+    interface:
+      display_name: "Publish a PRD"
+      short_description: "Write the finished PRD to its configured destination"
+      default_prompt: "Use $publishing-prd to publish this PRD where it belongs."
+    policy:
+      allow_implicit_invocation: false

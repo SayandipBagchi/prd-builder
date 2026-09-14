@@ -1,0 +1,27 @@
+{
+  "name": "prd-builder",
+  "version": "1.0.0",
+  "description": "Takes a product idea from source ticket to shippable delivery artefacts: drafts a definition-of-ready PRD, reviews it against its sources on a scoreable rubric, and gates task breakdown, test design and publishing on that verdict. Resolves each programme's ticket taxonomy, repo paths and publishing target from a tenant profile instead of assuming one Jira.",
+  "author": {
+    "name": "Sayandip Bagchi"
+  },
+  "license": "MIT",
+  "keywords": [
+    "prd",
+    "product-management",
+    "requirements",
+    "definition-of-ready",
+    "spec",
+    "acceptance-criteria",
+    "task-breakdown",
+    "jira",
+    "epic",
+    "test-cases",
+    "qa",
+    "confluence",
+    "review",
+    "rubric",
+    "fintech",
+    "multi-tenant"
+  ]
+}
