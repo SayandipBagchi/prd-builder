@@ -9,6 +9,11 @@ nobody can observe, acceptance criteria nobody can test. This package puts a def
 review between the draft and everything downstream, and the breakdown, test-design and publishing
 skills all read that verdict before they run.
 
+Compliance is part of what a finished document has to carry. A programme names its own regime in
+its profile rather than in the skill prose, so the same skills run unchanged across programmes with
+different Jira projects and different compliance regimes, and the test design covers the regulatory
+paths alongside the negative, boundary, permission and idempotency ones.
+
 **Use it if** you write PRDs against a ticket system and a wiki, and you want the gaps named before
 engineering finds them.
 
@@ -16,6 +21,17 @@ engineering finds them.
 engineering design and implementation planning. This reviews requirements, not solutions.
 
 **Status:** maintained, v1.0.0.
+
+## The gate
+
+`reviewing-prd` runs eleven checks and returns `ready`, `ready with conditions`, or `not ready`.
+Four checks are fatal on their own: source drift, absent success metrics, unobservable behaviour,
+and untestable requirements.
+
+Breakdown, test design and publishing all read that verdict. On `not ready` they stop and name the
+failing checks. You can override in words, and when you do, the override and the unresolved gaps
+are stamped into the header of whatever gets produced. A PRD that was never reviewed counts as not
+reviewed rather than as passing.
 
 ## Install
 
@@ -58,17 +74,6 @@ Then:
 It also picks the right skill up from plain phrasing: *write a PRD for this*, *poke holes in this
 spec*, *what are the edge cases here*, or a bare ticket key on a programme it knows.
 
-## The gate
-
-`reviewing-prd` runs eleven checks and returns `ready`, `ready with conditions`, or `not ready`.
-Four checks are fatal on their own: source drift, absent success metrics, unobservable behaviour,
-and untestable requirements.
-
-Breakdown, test design and publishing all read that verdict. On `not ready` they stop and name the
-failing checks. You can override in words, and when you do, the override and the unresolved gaps
-are stamped into the header of whatever gets produced. A PRD that was never reviewed counts as not
-reviewed rather than as passing.
-
 ## What is in it
 
 | Skill | Owns |
@@ -86,8 +91,7 @@ Two skills are explicit-only, because they write to systems outside the conversa
 ## Programme profiles
 
 Nothing in the skill prose hardcodes a ticket taxonomy, a path convention or a tool. A profile is
-the one place a programme names its own, so the same skills run unchanged across programmes with
-different Jira projects and different compliance regimes.
+the one place a programme names its own.
 
 The package ships one illustrative profile, `example-saas`, with an `IDEA` / `REQ` / `DEL` taxonomy
 and the `docs/prd/` convention. It is marked `status: example`, so the router will not quietly
@@ -101,23 +105,14 @@ asks for the taxonomy, the repo path convention, the publishing target and the c
 then writes a profile from `skills/prd-builder/templates/tenant-profile.md`. A request that names
 no programme and matches no profile gets one question rather than a guess.
 
-## Layout
+## The package
 
-```
-prd-builder/
-├── .claude-plugin/                 plugin.json and marketplace.json
-├── commands/                       6 slash commands
-├── skills/                         6 skills, each with its own references/ and templates/
-├── hosts/openai.yaml               optional UI metadata for OpenAI hosts
-├── scripts/validate_skill.py       structural validator, stdlib only
-├── evals/                          15 cases, each with prompt and graders
-└── README.md, CHANGELOG.md, LICENSE
-```
-
-No `.mcp.json`, no `hooks/`, no `settings.json`, no `bin/`. The skills call whatever ticket and wiki
-tooling the profile names, so the package itself needs no connector.
-
-## Checking the package
+`.claude-plugin/` holds plugin.json and marketplace.json, `commands/` the 6 slash commands, and
+`skills/` the 6 skills, each with its own `references/` and `templates/`. Alongside them sit
+`hosts/openai.yaml` for optional UI metadata on OpenAI hosts, `scripts/validate_skill.py` for the
+structural validator, `evals/` with 15 cases, each with prompt and graders, and README.md,
+CHANGELOG.md and LICENSE. No `.mcp.json`, no `hooks/`, no `settings.json`, no `bin/`. The skills
+call whatever ticket and wiki tooling the profile names, so the package itself needs no connector.
 
 ```bash
 python3 scripts/validate_skill.py
@@ -130,11 +125,9 @@ no reference crosses a skill boundary with a relative path, that the rubric stil
 checks and four fatal ones, command wiring, that version and author are declared once, and the
 shape of every eval case.
 
-## Portability
-
-Plain Markdown with relative references inside each skill. No tool call, shell, package, network
-connection or vendor-specific variable in the skill prose, so the same folders run under Codex,
-ChatGPT or any other Agent Skills host. Per-host notes in
+Everything is plain Markdown with relative references inside each skill. No tool call, shell,
+package, network connection or vendor-specific variable in the skill prose, so the same folders run
+under Codex, ChatGPT or any other Agent Skills host. Per-host notes in
 `skills/prd-builder/references/portability.md`.
 
 ## Licence
